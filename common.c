@@ -5,9 +5,9 @@ int hostCounter = 0;
 int portOpenning[65538] = {0};
 
 void showUsage(int isSimple) {
-    printf("\nA simple scanner used in LAN.\n\n");
+    printf("\nA simple scanner on LAN.\n\n");
     printf("Usage: ./scanner [OPTION] [ip] <start port> <end port>\n");
-    printf("or just type: './scanner' to scan all hosts in LAN.\n");
+    printf("or just type: './scanner' to scan all hosts on LAN.\n");
     if (isSimple == 1) {
         printf("Try './scanner --help' for more information.\n");
     } else if (isSimple == 0) {
