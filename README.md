@@ -1,7 +1,5 @@
 # Simple Port Scanner on LAN
 
-This scanner is under development.?
-
 This scanner is only available on Linux, do not try to run it on Windows and WSL cause the latter do not support physical network adapter.
 
 Not recommended on other Unix distributions, they may have different definitions for protocol handlers.
@@ -60,4 +58,4 @@ CIDR address for fping: `192.168.1.0/24`;
 In `common.h, line 26, 27`:
 
 
-default start port: `1`, default end port: `1024`;
+default start port: `1`, default end port: `1024`.
