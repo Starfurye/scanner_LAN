@@ -21,13 +21,16 @@ void showUsage(int isSimple) {
     }
 }
 
-void getHosts() {
+int getHosts() {
     FILE *hostsLog;
     char ahost[BUFFER_SIZE];
     int i = 0;
+    struct in_addr addr;
+    struct hostent *phost;
+    char *p;
 
     printf("\nSearching LAN hosts...\n");
-    system("fping -g 192.168.1.0/24 -aq > hosts.log");
+    system("fping -g 192.168.2.0/24 -aq > hosts.log");
     hostsLog = fopen("./hosts.log", "r");
     if (hostsLog == NULL) {
         printf("opening log file failed, please try again\n");
@@ -43,12 +46,24 @@ void getHosts() {
 
     printf("Host list:\n");
     for(i = 0; i < hostCounter; ++i) {
-        printf("%s  ", hosts[i].ip);
-        if (i % 9 == 0 && i != 0) {
+        printf("%s", hosts[i].ip);
+        p = hosts[i].ip;
+        if (inet_pton(AF_INET, p, &addr) <= 0) {
+            printf("inet_pton error:%s\n", strerror(errno));
+            return -1;
+        }
+        phost = gethostbyaddr((const char*)&addr, sizeof(addr), AF_INET);
+        if (phost == NULL) {
+            printf("gethostbyaddr error:%s\n", strerror(h_errno));
+            return -1;
+        }	
+        printf("(%s)  ", phost->h_name);   	// hostname
+        if (i % 4 == 0 && i != 0) {
             printf("\n");
         }
     }
     printf("\n");
+    return 0;
 }
 
 int startScanning(char* ip, int stPort, int edPort) {

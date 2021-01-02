@@ -40,7 +40,7 @@ typedef struct {
 } Threads, *Threadsp;
 
 void showUsage(int isSimple);
-void getHosts();
+int getHosts();
 int startScanning(char* ip, int stPort, int edPort);
 void* threadChange(void* threadp);
 int tcpScan(char* ip, int port);
