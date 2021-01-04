@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# ide
+.idea/
+
+# For This Project
+hosts.log
